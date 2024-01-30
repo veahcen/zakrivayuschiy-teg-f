@@ -4,3 +4,52 @@
 ✦ theme-light — класс светлой темы
 ✦ не забудьте описать стили для изменения темы через медизапрос пользовательских предпочтений
 */
+
+:root.theme-light {
+  --weight-text-card: 400;
+  --weight-text-card-title: 700;
+  --main-background: #FFFFFF;
+  --main-color: #000000;
+  --background-img:   repeating-linear-gradient(to right, #d3d3d3, #d3d3d3 2px, transparent 2px, transparent 4px),
+  repeating-linear-gradient(to bottom, #d3d3d3, #d3d3d3 2px, transparent 2px, transparent 4px), 
+  linear-gradient(#e7e7e7 0.01%, #1a1a1a);
+  --color-text-button: #FFFFFF;
+}
+
+:root.theme-dark {
+  --weight-text-card: 465;
+  --weight-text-card-title: 785;
+  --main-background: #000000;
+  --main-color: #00CC14;
+  --background-img:   repeating-linear-gradient(to right, #000, #000 2px, transparent 2px, transparent 4px),
+  repeating-linear-gradient(to bottom, #000, #000 2px, transparent 2px, transparent 4px), 
+  linear-gradient(#007f0c, #004306);
+  --color-text-button: #00CC14;
+}
+
+.theme-light {
+  background-color: var(--main-background);
+  background-image: var(--background-img);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.theme-dark {
+  background-color: var(--main-background);
+  background: var(--background-img);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --weight-text-card: 465;
+    --weight-text-card-title: 785;
+    --main-background: #000000;
+    --main-color: #00CC14;
+    --background-img:   repeating-linear-gradient(to right, #000, #000 2px, transparent 2px, transparent 4px),
+  repeating-linear-gradient(to bottom, #000, #000 2px, transparent 2px, transparent 4px), 
+  linear-gradient(#007f0c, #004306);
+    --color-text-button: #00CC14;
+  }
+}
