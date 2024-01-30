@@ -176,7 +176,7 @@
 }
 
 .card__image-blure-seventh {
-  filter: contrast(310%);
+  filter: invert(0.4) contrast(310%) grayscale(0.2);
 }
 
 .card__image-track {
