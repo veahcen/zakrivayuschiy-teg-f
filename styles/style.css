@@ -39,7 +39,7 @@
   align-items: center;
   margin-block-start: 101px;
   border:  2px solid var(--main-color);
-  font-family: var(--accent-font);
+  font-family: var(--accent-font, fantasy);
   text-transform: uppercase;
   background-color: var(--main-background);
   inline-size: 100%;
@@ -127,17 +127,30 @@
   animation: choice 0.5s ease-in-out infinite alternate;
 }
 
+.theme-menu__button:hover::before {
+  content: '▶';
+  position: absolute;
+  left: -21px;
+  animation: choice 0.5s ease-in-out infinite alternate;
+}
+
+.theme-menu__button:focus::before {
+  content: '▶';
+  position: absolute;
+  left: -21px;
+  animation: choice 0.5s ease-in-out infinite alternate;
+}
+
 .main {
   margin-block-start: 101px;
   margin-block-end: 105px;
 }
 
 .card {
-  margin-block-end: 54px;
+  margin-block-end: 48px;
   border: 2px solid var(--main-color);
   background-color: var(--main-background);
   inline-size: 100%;
-  block-size: 961px;
 }
 
 .card__header {
@@ -187,15 +200,17 @@
   position: absolute;
   top: 25px;
   right: 25px;
+  z-index: 1;
   opacity: 0.5;
-  font-family: var(--accent-font);
+  font-family: var(--accent-font, fantasy);
   font-size: var(--font-size-theme);
   text-shadow: -1px 0 var(--main-background), 0 1px var(--main-background), 1px 0 var(--main-background), 0 -1px var(--main-background);
 }
 
-@supports(-webkit-text-stroke: 1px var(--main-background)) {
+@supports( (text-stroke: 1px var(--main-background)) or (-webkit-text-stroke: 1px var(--main-background))) {
     .card__imag-text {
         text-shadow: none;
+        text-stroke: 1px var(--main-background);
         -webkit-text-stroke: 1px var(--main-background);
     }
 } 
@@ -246,7 +261,7 @@ button {
 .card__like-button {
   position: relative;
   border: 2px solid var(--main-color);
-  font-family: var(--accent-font);
+  font-family: var(--accent-font, fantasy);
   font-size: var(--font-size-theme);
   line-height: 90%;
   inline-size: 130px;
@@ -294,7 +309,7 @@ button {
   align-items: center;
   margin: 0 auto;
   border: 2px solid var(--main-color);
-  font-family: var(--accent-font);
+  font-family: var(--accent-font, fantasy);
   font-size: var(--font-size-theme);
   line-height: 90%;
   background-color: var(--main-background);
@@ -338,17 +353,6 @@ button {
   z-index: 1;
   fill: var(--color-text-button);
   mix-blend-mode: difference;
-}
-
-
-
-@keyframes choice {
-  from {
-    left: -21px;
-  }
-  to {
-    left: -25px;
-  }
 }
 
 .sparks {
@@ -427,18 +431,6 @@ button {
 
 }
 
-@keyframes scaleHeart {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.5);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
 .like-icon.is-liked > .sparks {
   animation-name: sparks;
   animation-delay: 0.3s;
@@ -448,21 +440,10 @@ button {
   animation-duration: 0.3s;
 }
 
-@keyframes sparks {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
 .dialog {
   display: none;
   border: 2px solid var(--main-color);
+  overflow: hidden;
   background-color: var(--main-background);
   inline-size: 357px;
   block-size: 193px;
@@ -478,9 +459,9 @@ button {
 }
 
 .dialog__header {
-  font-family: var(--accent-font);
-  font-size: var(--font-size-theme);
   color: var(--main-color);
+  font-family: var(--accent-font, fantasy);
+  font-size: var(--font-size-theme);
   line-height: 150%;
   text-transform: uppercase;
   inline-size: 234px;
@@ -501,7 +482,7 @@ button {
 .dialog__button {
   position: relative;
   border: 2px solid var(--main-color);
-  font-family: var(--accent-font);
+  font-family: var(--accent-font, fantasy);
   font-size: var(--font-size-theme);
   inline-size: 293px;
   block-size: 38px;
@@ -525,8 +506,17 @@ button {
   transform: scaleX(1);
 }
 
+.dialog__button:focus {
+  outline: none;
+}
+
+.dialog__button:focus-visible {
+  box-shadow: 2px 2px 0 0 var(--main-color);
+}
+
 dialog::backdrop {
-  background-color: var(--main-color);
+  opacity: 0.75;
+  background-color: #000;
   backdrop-filter: blur(6px);
 } 
 
@@ -536,8 +526,8 @@ dialog::backdrop {
     block-size: 326px;
   }
 
-  .card {
-    block-size: 759px;
+  .header__theme-menu {
+    margin-block-end: 26px;
   }
 
   .content {
@@ -547,6 +537,11 @@ dialog::backdrop {
   .card__icon-button {
     margin-block-start: 0;
     margin-block-end: 0;
+  }
+
+  .card__imag-text {
+    top: 24px;
+    right: 11px; 
   }
 
   .save {
@@ -561,7 +556,9 @@ dialog::backdrop {
   }
 
   .dialog {
-    width: 341px;
+    box-sizing: content-box;
+    inline-size: 275px;
+    block-size: 131px;
   }
 
   .dialog__header {
